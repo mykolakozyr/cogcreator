@@ -70,7 +70,7 @@ def createOverview(ds):
 
 def createCOG(in_ds):
     driver = gdal.GetDriverByName('GTiff')
-    out_ds = driver.CreateCopy('in_memory_output.tif', in_ds, options=["TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"])
+    out_ds = driver.CreateCopy('/vsimem/in_memory_output.tif', in_ds, options=["TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"])
     return out_ds
 
 def get_image_download_link(img):
