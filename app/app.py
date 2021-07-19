@@ -1,5 +1,6 @@
 import streamlit as st
 import os.path
+import pathlib
 import sys
 import base64
 from urllib.parse import urlparse
@@ -65,23 +66,24 @@ def readFile(uploaded_file):
 def createOverview(ds):
     """ Creates Overview of the TIFF """
     #gdal.SetConfigOption('COMPRESS_OVERVIEW', 'DEFLATE')
-    ds.BuildOverviews('AVERAGE', [4, 8, 16, 32, 64, 128])
+    ds.BuildOverviews('AVERAGE', [2, 4, 8, 16])
     return ds
 
 def createCOG(in_ds):
+    STREAMLIT_STATIC_PATH = pathlib.Path(st.__path__[0]) / 'static'
+    DOWNLOADS_PATH = (STREAMLIT_STATIC_PATH / "downloads")
+    if not DOWNLOADS_PATH.is_dir():
+        DOWNLOADS_PATH.mkdir()
     driver = gdal.GetDriverByName('GTiff')
-    out_ds = driver.CreateCopy('/vsimem/in_memory_output.tif', in_ds, options=["TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"])
+    out_ds = driver.CreateCopy(str(DOWNLOADS_PATH / "mydata_2.tiff"), in_ds, options=["TILED=YES", "COPY_SRC_OVERVIEWS=YES"])
     return out_ds
 
-def get_image_download_link(img):
-    """Generates a link allowing the PIL image to be downloaded
-    in:  PIL image
-    out: href string
-    """
-    buffered = BytesIO()
-    img.imsave(buffered, format="TIFF")
+def get_image_download_link(img,filename,text):
+    buffered = BytesIO(img)
+    st.write(type(buffered))
+    #img.save(buffered, format="TIFF")
     img_str = base64.b64encode(buffered.getvalue()).decode()
-    href = f'<a href="data:file/tiff;base64,{img_str}">Download result</a>'
+    href =  f'<a href="data:file/txt;base64,{img_str}" download="{filename}">{text}</a>'
     return href
 
 # if source == 'Local file':
@@ -98,9 +100,21 @@ if uploaded_file is not None:
 
             cog_ds = createCOG(ds)
             st.write('COG created')
-            st.write(type(cog_ds))
+
+            st.markdown("Download from [downloads/mydata.tiff](downloads/mydata_2.tiff)")
             
-            st.markdown(get_image_download_link(cog_ds.ReadAsArray()), unsafe_allow_html=True)
+            # f = gdal.VSIFOpenL('/vsimem/in_memory_output.tif', 'rb')
+            # gdal.VSIFSeekL(f, 0, 2) # seek to end
+            # size = gdal.VSIFTellL(f)
+            # gdal.VSIFSeekL(f, 0, 0) # seek to beginning
+            # data = gdal.VSIFReadL(1, size, f)
+            # gdal.VSIFCloseL(f)
+
+            # st.write(type(data))
+            # st.write(type(f))
+
+            
+            # st.markdown(get_image_download_link(data, filename, 'download'), unsafe_allow_html=True)
 
 
 # elif source == 'Link to remote file':
