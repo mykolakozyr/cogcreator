@@ -77,7 +77,7 @@ if uploaded_file is not None:
 &nbsp[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee--yellow.svg?logo=buy-me-a-coffee&logoColor=orange&style=social)](https://www.buymeacoffee.com/mykolakozyr)
 
 ## Details
-The app creates the [Cloud Optimezed GeoTIFF (COG)](https://www.cogeo.org/) from the GeoTIFF file. 
+The app creates the [Cloud Optimized GeoTIFF (COG)](https://www.cogeo.org/) from the GeoTIFF file. 
 The implementation designed to be as simple as possible. 
 The COG Creation code is mainly based on [the article](https://medium.com/@saxenasanket135/cog-overview-and-how-to-create-and-validate-a-cloud-optimised-geotiff-b39e671ff013) by [Sanket Saxena](https://medium.com/@saxenasanket135) with [PyGDAL specifics](https://stackoverflow.com/a/50949172).
 
