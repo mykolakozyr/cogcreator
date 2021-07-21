@@ -1,7 +1,7 @@
 # Cloud Optimized GeoTIFF Creator
 Simple [Cloud Optimized GeoTIFF](https://www.cogeo.org/) Creator. Just upload a GeoTIFF file and click "Create COG". The app would build a Cloud Optimized GeoTIFF so you can download it.
 
-![COG Creator Demo](https://cogviewerapp.s3.eu-central-1.amazonaws.com/cogcreator.gif)
+
 
 ## Details
 The implementation designed to be as simple as possible. The COG Creation code is mainly based on [the article](https://medium.com/@saxenasanket135/cog-overview-and-how-to-create-and-validate-a-cloud-optimised-geotiff-b39e671ff013) by [Sanket Saxena](https://medium.com/@saxenasanket135) with [PyGDAL specifics](https://stackoverflow.com/a/50949172).
