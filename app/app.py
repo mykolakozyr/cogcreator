@@ -83,7 +83,7 @@ The COG Creation code is mainly based on [the article](https://medium.com/@saxen
 
 The outcome of the creator is the Cloud Optimized GeoTIFF: 
 - Overviews built with the following parameters: `'AVERAGE', [2, 4, 8, 16, 32, 64, 128, 256]`
-- COG build with the following parameters: `"TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"`
+- COG built with the following parameters: `"TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"`
 """
 
 col1, col2 = st.beta_columns([1,1])
