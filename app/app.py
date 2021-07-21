@@ -46,7 +46,7 @@ def createCOG(in_ds, DOWNLOADS_PATH, filename):
 STREAMLIT_STATIC_PATH = pathlib.Path(st.__path__[0]) / 'static'
 DOWNLOADS_PATH = (STREAMLIT_STATIC_PATH / "downloads")
 
-uploaded_file = st.file_uploader("Choose a TIFF file", type=['tif','tiff'])
+uploaded_file = st.file_uploader("Choose the GeoTIFF file", type=['tif','tiff'])
 if uploaded_file is not None:
     
     if st.button('Create COG'):
@@ -90,6 +90,7 @@ col1, col2 = st.beta_columns([1,1])
 
 with col1.beta_expander("Quality Assurance"):
     st.write("✅ Tested on Google Chrome Version 91.0.4472.114.")
+    st.write(":warning: Opens COG file in the new tab in Safari Version 14.1 (15611.1.21.161.7, 15611)")
     st.write("✅ Removes the file from the static folder once creating the next COG.")
     st.write("✅ Generates [valid](https://share.streamlit.io/mykolakozyr/cogvalidator/main/app/app.py) Cloud Optimized GeoTIFF.")
 with col2.beta_expander("Known Limitations"):
