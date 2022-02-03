@@ -86,18 +86,15 @@ The outcome of the creator is the Cloud Optimized GeoTIFF:
 - COG built with the following parameters: `"TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"`
 """
 
-col1, col2 = st.beta_columns([1,1])
-
-with col1.beta_expander("Quality Assurance"):
+with st.expander("Quality Assurance"):
     st.write("✅ Tested on Google Chrome Version 91.0.4472.114.")
     st.write(":warning: Opens COG file in the new tab in Safari Version 14.1 (15611.1.21.161.7, 15611)")
     st.write("✅ Removes the file from the static folder once creating the next COG.")
     st.write("✅ Generates [valid](https://share.streamlit.io/mykolakozyr/cogvalidator/main/app/app.py) Cloud Optimized GeoTIFF.")
-with col2.beta_expander("Known Limitations"):
+with st.expander("Known Limitations"):
     st.write(":warning: Max file size to upload is 200MB.")
     st.write(":warning: Overview levels are hardcoded to [2, 4, 8, 16, 32, 64, 128, 256].")
     st.write(":warning: LZW Compression is hardcoded.")
     st.write(":warning: Supports only TIF(F) files as an input.")
     st.write(":warning: Hardcoded code for no BIGTIFF support.")
     st.write(":warning: Uses a [dirty hack](https://github.com/streamlit/streamlit/issues/400#issuecomment-648580840) to download data.")
-    #st.write(":warning: requirements.txt should be reviewed and cleaned.")
