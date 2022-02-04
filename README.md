@@ -11,8 +11,9 @@ The outcome of the creator is the Cloud Optimized GeoTIFF:
 - COG build with the following parameters: `"TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"`
 
 ### Quality Assurance
-- ✅ Tested on Google Chrome Version 91.0.4472.114.
+- ✅ Tested on Google Chrome Version 97.0.4692.99
 - :warning: Opens COG file in the new tab in Safari Version 14.1 (15611.1.21.161.7, 15611).
+- ⛔️ Not working if the filename has blanks. See [issue](https://github.com/mykolakozyr/cogcreator/issues/1).
 - ✅ Removes the file from the static folder once creating the next COG.
 - ✅ Generates [valid](https://share.streamlit.io/mykolakozyr/cogvalidator/main/app/app.py) Cloud Optimized GeoTIFF.
 ### Known Limitations
