@@ -8,7 +8,7 @@ from uuid import uuid4
 from osgeo import gdal
 
 
-CLOUD_EMOJI_URL = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/cloud_2601-fe0f.png"
+CLOUD_EMOJI_URL = "https://em-content.zobj.net/source/apple/354/cloud_2601-fe0f.png"
 
 
 # Set page title and favicon.
