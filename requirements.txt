@@ -1,2 +1,2 @@
 streamlit==1.31.0
-pygdal==3.6.2.11
+pygdal==3.2.2.10
