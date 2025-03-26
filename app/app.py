@@ -41,8 +41,7 @@ def createCOG(in_ds, DOWNLOADS_PATH, filename):
     driver = gdal.GetDriverByName('GTiff')
     driver.CreateCopy(str(DOWNLOADS_PATH / filename), in_ds, options=["TILED=YES", "COMPRESS=LZW", "COPY_SRC_OVERVIEWS=YES"])
 
-STREAMLIT_STATIC_PATH = pathlib.Path(st.__path__[0]) / 'static'
-DOWNLOADS_PATH = (STREAMLIT_STATIC_PATH / "downloads")
+DOWNLOADS_PATH = pathlib.Path("downloads")
 
 uploaded_file = st.file_uploader("Choose the GeoTIFF file", type=['tif','tiff'])
 if uploaded_file is not None:
