@@ -2,14 +2,11 @@ import streamlit as st
 import os.path
 import pathlib
 import sys
-import base64
 import shutil
 from uuid import uuid4
 from osgeo import gdal
 
-
 CLOUD_EMOJI_URL = "https://em-content.zobj.net/source/apple/354/cloud_2601-fe0f.png"
-
 
 # Set page title and favicon.
 st.set_page_config(
@@ -24,6 +21,7 @@ st.image(CLOUD_EMOJI_URL, width=80)
 """
 # Cloud Optimized GeoTIFF Creator
 """
+
 uploaded_file = None
 
 def readFile(uploaded_file):
@@ -48,7 +46,6 @@ DOWNLOADS_PATH = (STREAMLIT_STATIC_PATH / "downloads")
 
 uploaded_file = st.file_uploader("Choose the GeoTIFF file", type=['tif','tiff'])
 if uploaded_file is not None:
-    
     if st.button('Create COG'):
         try:
             shutil.rmtree(str(DOWNLOADS_PATH)) #removing folder
@@ -66,15 +63,22 @@ if uploaded_file is not None:
             st.info('Overviews are created')
 
             createCOG(ds, DOWNLOADS_PATH, filename)
-            st.success("✅ **Cloud Optimized GeoTIFF is created**. You can **[download your file](downloads/"+filename+")**")
+            st.success("✅ **Cloud Optimized GeoTIFF is created**.")
 
-            #st.markdown("Download from [downloads/"+filename+"](downloads/cog_"+filename+")")
+            with open(DOWNLOADS_PATH / filename, "rb") as f:
+                data = f.read()
+
+            st.download_button(
+                label="📥 Download COG",
+                data=data,
+                file_name=filename,
+                mime="image/tiff"
+            )
 
 """
 ---
 [![Follow](https://img.shields.io/twitter/follow/mykolakozyr?style=social)](https://www.twitter.com/mykolakozyr)
-&nbsp[![Follow](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin&labelColor=blue)](https://www.linkedin.com/in/mykolakozyr/)
-&nbsp[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee--yellow.svg?logo=buy-me-a-coffee&logoColor=orange&style=social)](https://www.buymeacoffee.com/mykolakozyr)
+[![Follow](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin&labelColor=blue)](https://www.linkedin.com/in/mykolakozyr/)
 
 ## Details
 The app creates the [Cloud Optimized GeoTIFF (COG)](https://www.cogeo.org/) from the GeoTIFF file. 
@@ -92,10 +96,11 @@ with st.expander("Quality Assurance"):
     st.write("⛔️ Not working if the filename has blanks. See [issue](https://github.com/mykolakozyr/cogcreator/issues/1).")
     st.write("✅ Removes the file from the static folder once creating the next COG.")
     st.write("✅ Generates [valid](https://share.streamlit.io/mykolakozyr/cogvalidator/main/app/app.py) Cloud Optimized GeoTIFF.")
+
 with st.expander("Known Limitations"):
     st.write(":warning: Max file size to upload is 200MB.")
     st.write(":warning: Overview levels are hardcoded to [2, 4, 8, 16, 32, 64, 128, 256].")
     st.write(":warning: LZW Compression is hardcoded.")
     st.write(":warning: Supports only TIF(F) files as an input.")
     st.write(":warning: Hardcoded code for no BIGTIFF support.")
-    st.write(":warning: Uses a [dirty hack](https://github.com/streamlit/streamlit/issues/400#issuecomment-648580840) to download data.")
+    st.write(":warning: Uses a [dirty hack](https://github.com/streamlit/streamlit/issues/400#issuecomment-648580840) to download data — now replaced by `st.download_button`. 🎉")
