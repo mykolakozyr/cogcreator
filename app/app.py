@@ -52,8 +52,7 @@ if uploaded_file is not None:
         except OSError:
             pass
 
-        if not DOWNLOADS_PATH.is_dir():
-            DOWNLOADS_PATH.mkdir()
+        DOWNLOADS_PATH.mkdir(parents=True, exist_ok=True)
 
         with st.spinner('Generating Cloud Optimized GeoTIFF...'):
             ds = readFile(uploaded_file) # Creating a GDAL Dataset
